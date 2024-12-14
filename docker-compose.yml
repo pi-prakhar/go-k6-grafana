@@ -1,0 +1,13 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5" # Limit the container to 50% of a single CPU
+          memory: "256M" # Limit the container to 256MB of memory
+    restart: always
