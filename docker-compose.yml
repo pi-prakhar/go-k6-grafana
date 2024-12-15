@@ -1,5 +1,6 @@
 services:
   server:
+    container_name: go-test-server
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -11,3 +12,22 @@ services:
           cpus: "0.5" # Limit the container to 50% of a single CPU
           memory: "256M" # Limit the container to 256MB of memory
     restart: always
+    networks:
+      - testnet
+
+  k6:
+    container_name: go-test-k6
+    image: grafana/k6
+    volumes:
+      - ./k6:/scripts
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "4G"
+    entrypoint: [ "/bin/sh", "-c", "tail -f /dev/null" ]
+    networks:
+      - testnet
+    
+networks:
+  testnet:
