@@ -23,11 +23,37 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "2"
-          memory: "4G"
+          cpus: "2.0"
+          memory: "1G"
     entrypoint: [ "/bin/sh", "-c", "tail -f /dev/null" ]
     networks:
       - testnet
-    
+  
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - testnet
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - testnet
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana-data:/var/lib/grafana
+
 networks:
   testnet:
+    driver: bridge
+
+volumes:
+  grafana-data:

@@ -1,6 +1,10 @@
 package api
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+)
 
 type Router struct {
 	Mux     *http.ServeMux
@@ -18,4 +22,5 @@ func NewRouter(handler Handler) *Router {
 
 func (m *Router) initRouter() {
 	m.Mux.HandleFunc("/get", m.handler.HandleTest)
+	m.Mux.Handle("/metrics", promhttp.Handler())
 }

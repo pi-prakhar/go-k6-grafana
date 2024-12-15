@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	api "github.com/pi-prakhar/go-k6-grafana/internal"
+	"github.com/pi-prakhar/go-k6-grafana/metrics"
 )
 
 const (
@@ -12,6 +13,8 @@ const (
 )
 
 func main() {
+	metrics.InitMetrics()
+
 	handler := api.NewHandler()
 	router := api.NewRouter(handler)
 
