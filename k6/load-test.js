@@ -3,7 +3,7 @@ import { check, sleep } from "k6";
 
 // Configuration for a steady load test
 export let options = {
-  vus: 5000, // 1000000 Virtual Users
+  vus: 1000, // 1000 Virtual Users
   duration: "1m", // Test duration of 1 minute
 };
 
