@@ -1,0 +1,7 @@
+apiVersion: v2
+name: go-k6
+description: A Helm chart for deploying the go-k6 Grafana server
+type: application
+version: 1.0.0
+appVersion: 1.0.0
+
