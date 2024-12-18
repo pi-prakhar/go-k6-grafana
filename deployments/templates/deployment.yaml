@@ -25,5 +25,11 @@ spec:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
               memory: {{ .Values.resources.requests.memory }}
+          env:
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: PORT
           imagePullPolicy: {{ .Values.image.pullPolicy }}
       restartPolicy: Always

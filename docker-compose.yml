@@ -4,13 +4,15 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    environment:
+      - PORT=${PORT}
     ports:
-      - "8080:8080"
+      - "${PORT}:${PORT}"
     deploy:
       resources:
         limits:
-          cpus: "0.5" # Limit the container to 50% of a single CPU
-          memory: "256M" # Limit the container to 256MB of memory
+          cpus: "0.5"
+          memory: "256M"
     restart: always
     networks:
       - testnet
